@@ -1,21 +1,18 @@
-import unittest
-from src.homework.c_decisions.decisions import get_options_ratio
-from src.homework.c_decisions.decisions import get_faculty_rating
+def get_options_ratio(option, total):
+    """Returns the ratio of options divided by total."""
+    if total == 0:
+        return 0  # To prevent division by zero
+    return option / total
 
-class Test_Config(unittest.TestCase):
-
-    # Test for get_options_ratio function
-    def test_get_options_ratio(self):
-        self.assertEqual(get_options_ratio(5, 20), 0.25)  # 5/20 should be 0.25
-        self.assertEqual(get_options_ratio(10, 20), 0.5)  # 10/20 should be 0.5
-
-    # Test for get_faculty_rating function
-    def test_get_faculty_rating(self):
-        self.assertEqual(get_faculty_rating(0.91), 'Excellent')
-        self.assertEqual(get_faculty_rating(0.85), 'Very Good')
-        self.assertEqual(get_faculty_rating(0.71), 'Good')
-        self.assertEqual(get_faculty_rating(0.66), 'Needs Improvement')
-        self.assertEqual(get_faculty_rating(0.45), 'Unacceptable')
-
-if __name__ == '__main__':
-    unittest.main()
+def get_faculty_rating(ratio):
+    """Returns faculty rating based on the given ratio."""
+    if 0.9 <= ratio < 1:
+        return "Excellent"
+    elif ratio > 0.8:
+        return "Very Good"
+    elif ratio > 0.7:
+        return "Good"
+    elif ratio > 0.6:
+        return "Needs Improvement"
+    else:
+        return "Unacceptable"
