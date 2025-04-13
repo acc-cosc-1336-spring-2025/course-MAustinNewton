@@ -1,37 +1,31 @@
-from lists import get_lowest_list_value, get_highest_list_value
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../")))
+
+from src.homework.g_lists_and_tuples.lists import get_p_distance_matrix
 
 def main():
     while True:
-        print("\n1 - Show the list low/high values")
+        print("\n1 - Get p distance matrix")
         print("2 - Exit")
         choice = input("Enter your choice: ")
 
         if choice == "1":
-            numbers = []
-            while True:
-                try:
-                    value = int(input("Enter a list value: "))
-                    numbers.append(value)
-                except ValueError:
-                    print("Please enter a valid integer.")
-                    continue
+            n = int(input("Enter number of DNA strings (≤ 10): "))
+            dna_lists = []
+            for i in range(n):
+                dna = list(input(f"Enter DNA string {i+1}: ").strip())
+                dna_lists.append(dna)
 
-                if len(numbers) >= 3:
-                    cont = input("Do you want to enter another value? (y/n): ")
-                    if cont.lower() != 'y':
-                        break
-
-            if numbers:
-                print(f"Lowest value: {get_lowest_list_value(numbers)}")
-                print(f"Highest value: {get_highest_list_value(numbers)}")
-            else:
-                print("No values entered.")
-
+            matrix = get_p_distance_matrix(dna_lists)
+            print("\nP-Distance Matrix:")
+            for row in matrix:
+                print(" ".join(f"{val:.5f}" for val in row))
         elif choice == "2":
-            print("Exiting program.")
+            print("Goodbye!")
             break
         else:
-            print("Invalid choice. Please enter 1 or 2.")
+            print("Invalid option. Try again.")
 
 if __name__ == "__main__":
     main()
